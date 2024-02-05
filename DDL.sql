@@ -54,7 +54,18 @@ DROP DATABASE practice_sql;
 ALTER TABLE example_table 
 ADD added_column INT;
 
+-- 테이블 컬럼 삭제
+ALTER TABLE example_table
+DROP COLUMN added_column;
 
+-- 테이블 컬럼 타입 수정
+ALTER TABLE example_table
+MODIFY COLUMN string_column VARCHAR(200);
+
+
+-- 테이블 컬럼 이름 수정
+ALTER TABLE example_table
+CHANGE string_column varchar_column VARCHAR(200);
 
 
 
