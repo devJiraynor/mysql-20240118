@@ -104,5 +104,47 @@ WHERE primary_column = 1;
 -- CASCADE : 참조하고 있는 테이블에서 데이터를 삭제하거나 수정했을 때, 참조하는 테이블에서도 삭제와 수정이 같이 일어남
 -- SET NULL : 참조하고 있는 테이블에서 데이터를 삭제하거나 수정했을 때, 참조하는 테이블의 해당 데이터를 null로 지정
 -- RESTRICT : 참조하는 테이블에 참조하는 데이터가 존재한다면 수정, 삭제가 불가능
+CREATE TABLE optional_foreign_table (
+    primary_column INT,
+    foreign_colum INT,
+    FOREIGN KEY (foreign_colum)
+    REFERENCES primary_table (primary_column)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL
+);
+
+INSERT INTO primary_table VALUES (1, 1);
+INSERT INTO optional_foreign_table VALUES (1, 1);
+SELECT * FROM optional_foreign_table;
+
+UPDATE primary_table SET primary_column = 3 WHERE primary_column = 1;
+SELECT * FROM optional_foreign_table;
+
+DELETE FROM primary_table WHERE primary_column = 3;
+SELECT * FROM optional_foreign_table;
+
+-- CHECK 제약조건: 특정 컬럼에 값을 제한함
+CREATE TABLE check_table (
+    primary_column INT PRIMARY KEY,
+    check_column VARCHAR(10) CHECK (check_column IN('남', '여'))
+);
+
+INSERT INTO check_table VALUES (1, '남');
+INSERT INTO check_table VALUES (2, '남자');
+
+UPDATE check_table SET check_column = '남자';
+
+-- DEFAULT 제약조건: 컬럼에 데이터가 지정되지 않았을 때 사용할 기본값 지정
+CREATE TABLE default_table (
+    primary_column INT PRIMARY KEY,
+    default_column VARCHAR(10) DEFAULT '기본값'
+);
+
+INSERT INTO default_table (primary_column) VALUES (1);
+INSERT INTO default_table VALUES (2, null);
+
+SELECT * FROM default_table;
+
+
 
 
