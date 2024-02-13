@@ -94,6 +94,6 @@ GRANT SELECT ON *.* TO 'student'@'%';
 
 -- LIMIT 개수 : 결과테이블에서 지정한 개수만큼의 상위 데이터만 보여줌
 SELECT  * FROM jeju LIMIT 10;
--- LIMIT 재외 레코드 개수, 개수 : 상위에서 재외 레코드 개수만큼 재외 후 개수만큼의 데이터만 보여줌
+-- LIMIT 제외 레코드 개수, 개수 : 상위에서 제외 레코드 개수만큼 제외 후 개수만큼의 데이터만 보여줌
 SELECT * FROM jeju LIMIT 10, 3;
 
